@@ -406,7 +406,7 @@ namespace LeagueSharp.Common
                             source.CalcDamage(
                                 target,
                                 DamageType.Magical,
-                                (float)0.5d * source.FlatMagicDamageMod + source.BaseAttackDamage + source.FlatPhysicalDamageMod
+                                (float)0.5d * source.FlatMagicDamageMod
                                 + new float[]
                                       { 20, 25, 30, 35, 40, 45, 50, 55, 60, 70, 80, 90, 110, 130, 150, 170, 190, 210 }[
                                           source.Level - 1]),
@@ -781,11 +781,7 @@ namespace LeagueSharp.Common
                                 Slot = SpellSlot.W, DamageType = DamageType.Magical,
                                 Damage =
                                     (source, target, level) =>
-                                          new double[]
-                                          {
-                                              50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 110, 120, 130,
-                                              140, 150, 160, 170
-                                          }[((Obj_AI_Hero)source).Level - 1]
+                                    new double[] { 55, 60, 75, 80, 90 }[level]
                                     + 0.6 * source.FlatMagicDamageMod
                             },
                         //E
@@ -1401,6 +1397,7 @@ namespace LeagueSharp.Common
                                     (source, target, level) =>
                                     new double[] { 75, 125, 175, 225, 275 }[level]
                                     + 0.75 * source.FlatMagicDamageMod
+                                    + 0.5 * source.FlatPhysicalDamageMod
                             },
                         //R
                         new DamageSpell
@@ -5463,11 +5460,12 @@ namespace LeagueSharp.Common
                     result += d;
                 }
 
+                /*
                 // Arcane blade
                 if (hero.Masteries.Any(m => m.Page == MasteryPage.Offense && m.Id == 132 && m.Points == 1))
                 {
                     reduction -= CalcMagicDamage(hero, target, 0.05 * hero.FlatMagicDamageMod);
-                }
+                }*/
             }
 
             var targetHero = target as Obj_AI_Hero;
@@ -5869,13 +5867,13 @@ namespace LeagueSharp.Common
             if (source is Obj_AI_Turret)
             {
                 //Siege minions receive 70% damage from turrets
-                if (SiegeMinionList.Contains(target.BaseSkinName))
+                if (SiegeMinionList.Contains(target.CharData.BaseSkinName))
                 {
                     amount *= 0.7d;
                 }
 
                 //Normal minions take 114% more damage from towers.
-                else if (NormalMinionList.Contains(target.BaseSkinName))
+                else if (NormalMinionList.Contains(target.CharData.BaseSkinName))
                 {
                     amount *= 1.14285714285714d;
                 }

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LeagueSharp.Common</RootNamespace>
-    <AssemblyName>LeagueSharp.Common.45.Pred.No2</AssemblyName>
+    <AssemblyName>LeagueSharp.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PreBuildEvent />
